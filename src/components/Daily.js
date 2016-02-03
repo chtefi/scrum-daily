@@ -8,7 +8,7 @@ import User from './User.js';
 //
 
 const STYLE_BOARD = { background: 'white', width: '100%' };
-const STYLE_LIST = { display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', margin: 0, padding: 0 };
+const STYLE_LIST = { display: 'flex', flexWrap: 'wrap', margin: 0, padding: 0 };
 const STYLE_UNIT = { listStyleType: 'none', margin: 10 };
 
 // helper fn
