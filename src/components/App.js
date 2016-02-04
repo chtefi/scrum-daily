@@ -9,7 +9,7 @@ import reducer from '../reducers/dailyState';
 
 import Daily from './Daily.js';
 
-const STYLE_APP = { color: 'black', fontFamily: 'Roboto', padding: 100 };
+const STYLE_APP = { color: 'black', fontFamily: 'Roboto', padding: 10 };
 
 const storeEnhancer = applyMiddleware(logState, logAction);
 const createEnhancedStore = storeEnhancer(createStore);
