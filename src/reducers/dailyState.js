@@ -2,7 +2,7 @@ import { CREATE_USER, CREATE_TASK, DO_TASK, UNDO_TASK } from '../actions/types.j
 
 const DEFAULT_DAILY_STATE = {
   users: [
-    { id: 1, name: 'JC', tasks: [ { id: 1, text: 'todo', cdate: '2016-02-01', ddate: '2016-02-01' }, { id: 2, text: 'dunno', cdate: '2016-02-01', ddate: null } ]},
+    { id: 1, name: 'JC', tasks: [ { id: 1, text: 'todo', cdate: '2016-01-20', ddate: '2016-02-01' }, { id: 2, text: 'dunno', cdate: '2016-02-01', ddate: '2016-02-03' } ]},
     { id: 2, name: 'JR', tasks: [ { id: 3, text: 'here', cdate: '2016-02-01', ddate: '2016-02-03' }, { id: 4, text: 'that', cdate: '2016-02-01', ddate: null } ]}
   ]
 };

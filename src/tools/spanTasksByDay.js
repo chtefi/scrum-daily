@@ -16,7 +16,10 @@ export default (tasks) => tasks.reduce((acc, task) => {
     
     var t = { id: task.id, text: task.text, done: false };
     acc[yyyymmdd].push(t); // omg
-    processingDate = processingDate.add(1, 'day');
+
+    do {
+      processingDate = processingDate.add(1, 'day');
+    } while (processingDate.day() === 6 || processingDate.day() === 0);
 
     if (doneDate && doneDate.isBefore(processingDate)) {
       t.done = true; // omg
