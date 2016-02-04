@@ -1,4 +1,4 @@
-import { CREATE_USER, CREATE_TASK, DO_TASK, UNDO_TASK } from '../actions/types.js';
+import { CREATE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK } from '../actions/types.js';
 
 const DEFAULT_DAILY_STATE = {
   users: [
@@ -31,9 +31,20 @@ const changeTaskStatus = (userId, taskId, yyyymmddd) => mapOnlyFiltered(
     )(user.tasks)
 }));
 
+const changeTaskText = (userId, taskId, text) => mapOnlyFiltered(
+  (user) => user.id === userId,
+  (user) => ({
+    ...user,
+    tasks: mapOnlyFiltered(
+      (task) => task.id === taskId,
+      (task) => ({ ...task, text: text })
+    )(user.tasks)
+}));
+
 export default (state = DEFAULT_DAILY_STATE, action) =>
   action.type === CREATE_USER ? { ...state, users: state.users.concat(createNewUser(action.name)) } :
   action.type === CREATE_TASK ? { ...state, users: addTaskToUser(action.userId)(state.users) } :
   action.type === DO_TASK ?     { ...state, users: changeTaskStatus(action.userId, action.taskId, action.yyyymmdd)(state.users) } :
   action.type === UNDO_TASK ?   { ...state, users: changeTaskStatus(action.userId, action.taskId, null)(state.users) } :
+  action.type === RENAME_TASK ? { ...state, users: changeTaskText(action.userId, action.taskId, action.text)(state.users) } :
   state;
