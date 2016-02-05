@@ -1,5 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+
+import { getCreateUserAction } from '../actions/all.js';
 
 import User from './User.js';
 
@@ -15,14 +17,16 @@ const createUser = (props) => <li key={props.id} style={STYLE_USER}><User {...pr
 
 export class Daily extends React.Component {
   static propTypes = {
-    users: React.PropTypes.array.isRequired
+    users: React.PropTypes.array.isRequired,
+    onCreateUserClick: React.PropTypes.func.isRequired,
   };
 
   render() {
-    const { users } = this.props;
+    const { users, onCreateUserClick } = this.props;
 
     return (
       <div>
+        <button onClick={() => onCreateUserClick()}>Add a user</button>
         <ul style={STYLE_LIST}>
           {users.map(createUser)}
         </ul>
@@ -36,4 +40,7 @@ export class Daily extends React.Component {
 // 
 
 const mapStateToProps = (state) => ({ users: state.users });
-export default connect(mapStateToProps)(Daily);
+const mapDispatchToProps = (dispatch) => ({
+  onCreateUserClick: () => dispatch(getCreateUserAction())
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Daily);

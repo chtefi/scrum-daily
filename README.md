@@ -4,7 +4,6 @@ WIP.
 
 # TODO
 
-- [ ] ability to add a person
 - [ ] align days across people (should dynamic sizes per row)
 - [ ] ability to discard a task (cancelled, do not propagate)
 - [ ] ability to declare a task blocked (does propagate, special icon)
@@ -13,6 +12,7 @@ WIP.
 - [ ] localStorage or Firebase ?
 - [ ] short-link system to access to an existing board ?
 - [ ] offline ?
+- [x] ability to add a user
 - [x] ability to rename a user
 - [x] add a nice separator between weeks
 - [x] ability to check a task (present or past) and handle propagation 

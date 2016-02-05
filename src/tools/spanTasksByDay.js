@@ -34,6 +34,8 @@ export default (tasks) => {
     addGroupForDay(tasksByDay, processingDate);
     processingDate = getNextWorkingDay(processingDate);
   }
+  // ensure today is created too
+  addGroupForDay(tasksByDay, today);
 
   // fill each day with tasks that could span across multiple days
   tasks.forEach(({ id, cdate, ddate, text }) => {
