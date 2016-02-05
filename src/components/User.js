@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import spanTasksByDay from '../tools/spanTasksByDay.js';
+import spanTasksByDay, { isPostWeekEnd } from '../tools/spanTasksByDay.js';
 import moment from 'moment';
 
 import { getCreateTaskAction, getDoTaskAction, getUndoTaskAction, getRenameTaskAction } from '../actions/all.js';
@@ -8,13 +8,13 @@ import { EditableText } from './EditableText.js';
 
 const STYLE_CONTAINER = { background: 'white', width: 300, padding: 10, border: '1px solid rgba(0,0,0,.2)', borderRadius: 5, boxShadow: '3px 3px 10px rgba(0,0,0,.1)' };
 const STYLE_UL = { listStyle: 'none', padding: 0 };
-const STYLE_GROUP = (height) => ({ paddingTop: 10, paddingBottom: 10, borderTop: '1px solid rgba(0,0,0,.5)', minHeight: height });
-const DATE_STYLE = { paddingBottom: 10, fontWeight: 600 };
+const STYLE_GROUP = (height, isPostWeekEnd) => ({ paddingTop: 10, paddingBottom: 10, borderTop: '1px solid rgba(0,0,0,0.2)', minHeight: height, borderBottom: (isPostWeekEnd ? '20px solid orange' : '') });
+const STYLE_DATE = { paddingBottom: 10, fontWeight: 600 };
 const STYLE_USER = { paddingBottom: 10, fontWeight: 800 };
 const STYLE_BUTTON = { float: 'right' };
 
-const createGroup = (userId, date, tasks, height, onClickTaskCheckbox, onRenamedTask) => (<div key={date} style={STYLE_GROUP(height)}>
-    <header style={DATE_STYLE}>{moment(date).format('YYYY-MM-DD # dddd')}</header>
+const createGroup = (userId, date, tasks, height, onClickTaskCheckbox, onRenamedTask) => (<div key={date} style={STYLE_GROUP(height, isPostWeekEnd(date))}>
+    <header style={STYLE_DATE}>{moment(date).format('MMM DD | dddd')}</header>
     { tasks.map(t => <li key={t.id}>
                         <input type="checkbox" checked={t.done} onChange={() => onClickTaskCheckbox(userId, t.id, date, t.done)} />
                         <EditableText style={t.done ? { textDecoration: 'line-through'} : null} text={t.text} onTextChanged={(text) => onRenamedTask(userId, t.id, text)} />

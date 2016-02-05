@@ -14,6 +14,9 @@ import moment from 'moment';
 
 // TODO(sd): remove the keys usage ? and pass as a prop in an object ?
 
+const isPostWeekEnd = (date) => isWeekEnd(moment(date).add(-1, 'day'));
+export { isPostWeekEnd };
+
 const isWeekEnd = (date) => date.day() === 6 || date.day() === 0;
 const getNextWorkingDay = (date) => { do { date = date.add(1, 'day'); } while (isWeekEnd(date)); return date; }
 const getKey = (date) => date.format('YYYY-MM-DD');

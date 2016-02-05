@@ -2,8 +2,8 @@ import { CREATE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK } from '../ac
 
 const DEFAULT_DAILY_STATE = {
   users: [
-    { id: 1, name: 'JC', tasks: [ { id: 1, text: 'todo', cdate: '2016-01-20', ddate: '2016-02-01' }, { id: 2, text: 'dunno', cdate: '2016-02-01', ddate: '2016-02-03' } ]},
-    { id: 2, name: 'JR', tasks: [ { id: 3, text: 'here', cdate: '2016-02-01', ddate: '2016-02-03' }, { id: 4, text: 'that', cdate: '2016-02-01', ddate: null } ]}
+    { id: 1, name: 'JC', tasks: [ { id: 1, text: 'Trying to make the state works', cdate: '2016-01-20', ddate: '2016-02-01' }, { id: 2, text: 'Trying to find which background-color fits', cdate: '2016-02-01', ddate: '2016-02-03' } ]},
+    { id: 2, name: 'JR', tasks: [ { id: 3, text: 'Refactor the whole project', cdate: '2016-02-01', ddate: '2016-02-03' }, { id: 4, text: 'Sending some emails', cdate: '2016-02-01', ddate: null } ]}
   ]
 };
 
