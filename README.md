@@ -4,10 +4,10 @@ WIP.
 
 # TODO
 
-- [ ] align days across people (should dynamic sizes per row)
-- [ ] create day even on empty days
-- [ ] add a nice separator between weeks
+- [ ] ability to rename a user
 - [ ] ability to add a person
+- [ ] align days across people (should dynamic sizes per row)
+- [ ] add a nice separator between weeks
 - [ ] ability to discard a task (cancelled, do not propagate)
 - [ ] ability to declare a task blocked (does propagate, special icon)
 - [ ] style
@@ -17,3 +17,4 @@ WIP.
 - [x] ability to check a task (present or past) and handle propagation 
 - [x] don't display week-ends
 - [x] ability to rename a task
+- [x] create day even on empty days
