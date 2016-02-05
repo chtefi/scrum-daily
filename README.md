@@ -10,6 +10,7 @@ WIP.
 - [ ] add a nice separator between weeks
 - [ ] ability to discard a task (cancelled, do not propagate)
 - [ ] ability to declare a task blocked (does propagate, special icon)
+- [ ] ability to add task on any day (if we forgot something)
 - [ ] style
 - [ ] localStorage or Firebase ?
 - [ ] short-link system to access to an existing board ?
