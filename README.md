@@ -12,9 +12,10 @@ WIP.
 - [ ] ability to add task on any day (if we forgot something)
 - [ ] add a counter next to each task to know how many days it spans
 - [ ] style
-- [ ] localStorage or Firebase ?
+- [ ] Firebase as database?
 - [ ] short-link system to access to an existing board ?
 - [ ] offline ?
+- [x] save into localStorage for now
 - [x] ability to add a user
 - [x] ability to rename a user
 - [x] add a nice separator between weeks
