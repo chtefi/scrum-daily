@@ -10,7 +10,8 @@ import User from './User.js';
 //
 
 const STYLE_LIST = { display: 'flex', flexWrap: 'wrap', margin: 0, padding: 0 };
-const STYLE_USER = { listStyleType: 'none', margin: 5 };
+const STYLE_USER = { listStyleType: 'none', marginRight: 10 };
+const STYLE_BUTTON = { margin: '10px 0' };
 
 // helper fn
 const createUser = (props) => <li key={props.id} style={STYLE_USER}><User {...props} /></li>
@@ -26,7 +27,7 @@ export class Daily extends React.Component {
 
     return (
       <div>
-        <button onClick={() => onCreateUserClick()}>Add a user</button>
+        <button style={STYLE_BUTTON} onClick={() => onCreateUserClick()}>Add a user</button>
         <ul style={STYLE_LIST}>
           {users.map(createUser)}
         </ul>

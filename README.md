@@ -8,6 +8,7 @@ WIP.
 - [ ] ability to discard a task (cancelled, do not propagate)
 - [ ] ability to declare a task blocked (does propagate, special icon)
 - [ ] ability to add task on any day (if we forgot something)
+- [ ] add a counter next to each task to know how many days it spans
 - [ ] style
 - [ ] localStorage or Firebase ?
 - [ ] short-link system to access to an existing board ?
