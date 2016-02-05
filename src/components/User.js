@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import spanTasksByDay, { isPostWeekEnd } from '../tools/spanTasksByDay.js';
 import moment from 'moment';
 
-import { getCreateTaskAction, getDoTaskAction, getUndoTaskAction, getRenameTaskAction } from '../actions/all.js';
+import { getCreateTaskAction, getDoTaskAction, getUndoTaskAction, getRenameTaskAction, getRenameUserAction } from '../actions/all.js';
 import { EditableText } from './EditableText.js';
 
 const STYLE_CONTAINER = { background: 'white', width: 300, padding: 10, border: '1px solid rgba(0,0,0,.2)', borderRadius: 5, boxShadow: '3px 3px 10px rgba(0,0,0,.1)' };
@@ -37,14 +37,14 @@ export class User extends React.Component {
     onRenamedTask: React.PropTypes.func.isRequired
   };
   render() {
-    const { id, name, tasks, onCreateTaskClick, onClickTaskCheckbox, onRenamedTask } = this.props;
+    const { id, name, tasks, onCreateTaskClick, onClickTaskCheckbox, onRenamedTask, onUserNameChanged } = this.props;
 
     const tasksByDay = spanTasksByDay(tasks);
     const HEIGHT = 100; // TODO(sd): compute dynamic max height
 
     return (
       <div style={STYLE_CONTAINER}>
-        <header style={STYLE_USER}>{name} <button style={STYLE_BUTTON} onClick={() => onCreateTaskClick(id)}>Add task</button></header>
+        <header style={STYLE_USER}><EditableText text={name} onTextChanged={(name) => onUserNameChanged(id, name)} /><button style={STYLE_BUTTON} onClick={() => onCreateTaskClick(id)}>Add task</button></header>
         <ul style={STYLE_UL}>
           { Object.keys(tasksByDay).reverse().map(key => createGroup(id, key, tasksByDay[key], HEIGHT, onClickTaskCheckbox, onRenamedTask) ) }
         </ul>
@@ -62,6 +62,7 @@ const mapStateToProps = (state, props) => ({ id: props.id, name: props.name, tas
 const dispatchToProps = (dispatch) => ({
   onCreateTaskClick: (id) => dispatch(getCreateTaskAction(id)),
   onClickTaskCheckbox: (userId, taskId, yyyymmdd, checked) => dispatch((checked ? getUndoTaskAction : getDoTaskAction)(userId, taskId, yyyymmdd)),
-  onRenamedTask: (userId, taskId, text) => dispatch(getRenameTaskAction(userId, taskId, text))
+  onRenamedTask: (userId, taskId, text) => dispatch(getRenameTaskAction(userId, taskId, text)),
+  onUserNameChanged: (userId, name) => dispatch(getRenameUserAction(userId, name)),
 });
 export default connect(mapStateToProps, dispatchToProps)(User);
