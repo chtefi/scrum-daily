@@ -16,50 +16,40 @@ import moment from 'moment';
 
 const isWeekEnd = (date) => date.day() === 6 || date.day() === 0;
 const getNextWorkingDay = (date) => { do { date = date.add(1, 'day'); } while (isWeekEnd(date)); return date; }
-const addGroupForDay = (obj, date) => obj[date.format('YYYY-MM-DD')] = [];
+const getKey = (date) => date.format('YYYY-MM-DD');
+const addGroupForDay = (obj, date) => obj[getKey(date)] = [];
+const getMinDate = (tasks) => tasks.reduce((minDate, task) => minDate.isAfter(moment(task.cdate)) ? moment(task.cdate) : minDate, moment());
 
 export default (tasks) => {
-  tasks.sort((t1, t2) => moment(t1).isAfter(t2) ? 1 : -1);
+  const today = moment();
+  const minDate = getMinDate(tasks);
 
-  let processingDate;
+  // create every days from minDate to today
+  let processingDate = minDate;
+  const tasksByDay = {};
+  while (processingDate.isBefore(today)) {
+    addGroupForDay(tasksByDay, processingDate);
+    processingDate = getNextWorkingDay(processingDate);
+  }
 
-  const tasksByDay = tasks.reduce((acc, { id, cdate, ddate, text }) => {
+  // fill each day with tasks that could span across multiple days
+  tasks.forEach(({ id, cdate, ddate, text }) => {
     const creationDate = moment(cdate);
     const doneDate = ddate ? moment(ddate) : null; // a task can be not finished yet
-    
-    // we are going to iterate the dates, +1 day, +1 day etc. until the current date
-    // ultra-ugly, the variable is declared outside to know the last value it takes
-    processingDate = creationDate;
-    
-    // TODO(sd): omg
+    let processingDate = creationDate;
     
     do {
-      const tasks = addGroupForDay(acc, processingDate);
       const task = { id, text, done: false };
-      tasks.push(task); // omg
+      const key = getKey(processingDate);
+      tasksByDay[key].push(task); // omg
       processingDate = getNextWorkingDay(processingDate);
-
       if (doneDate && doneDate.isBefore(processingDate)) {
-        task.done = true; // omg
+        task.done = true; // omg (the last reference is mutated)
         break;
       }
-
+      // otherwise it loops until today
     } while (processingDate.isBefore(moment()));
-
-    return acc;
-  }, {});
-
-  const today = moment();
-  if (processingDate) {
-    // fill until today if not yet    
-    while (processingDate.isBefore(today)) {
-      addGroupForDay(tasksByDay, processingDate);      
-      processingDate = getNextWorkingDay(processingDate);      
-    }
-  } else if (!isWeekEnd(today)) {
-    // just add today
-    addGroupForDay(tasksByDay, today);
-  }
+  });
 
   return tasksByDay
 };
