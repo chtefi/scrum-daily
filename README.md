@@ -7,11 +7,11 @@ WIP.
 # TODO
 
 - [ ] align days across people (should dynamic sizes per row)
-- [ ] ability to discard a task (cancelled, do not propagate)
-- [ ] ability to declare a task blocked (does propagate, special icon)
+- [ ] ability to set any state on a task (propagating (blocked) OR not propagating (cancelled))
 - [ ] ability to add task on any day (if we forgot something)
 - [ ] add a counter next to each task to know how many days it spans
 - [ ] style
+- [ ] have some kind of different views? pluggable
 - [ ] Firebase as database?
 - [ ] short-link system to access to an existing board ?
 - [ ] offline ?
