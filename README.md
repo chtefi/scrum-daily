@@ -1,5 +1,7 @@
 Never forget your daily.
 
+[Demo](http://chtefi.github.io/scrum-daily/)
+
 WIP.
 
 # TODO
