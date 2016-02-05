@@ -35,6 +35,9 @@
     "eslint": "^1.10.3",
     "eslint-plugin-react": "^3.13.1",
     "react-transform-hmr": "^1.0.1",
+    "redux-devtools": "^3.1.0",
+    "redux-devtools-dock-monitor": "^1.0.1",
+    "redux-devtools-log-monitor": "^1.0.4",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0"
