@@ -30,12 +30,10 @@ export default (tasks) => {
   // create every days from minDate to today
   let processingDate = minDate;
   const tasksByDay = {};
-  while (processingDate.isBefore(today)) {
+  while (processingDate.isSameOrBefore(today, 'day')) {
     addGroupForDay(tasksByDay, processingDate);
     processingDate = getNextWorkingDay(processingDate);
   }
-  // ensure today is created too
-  addGroupForDay(tasksByDay, today);
 
   // fill each day with tasks that could span across multiple days
   tasks.forEach(({ id, cdate, ddate, text }) => {
@@ -55,6 +53,8 @@ export default (tasks) => {
       // otherwise it loops until today
     } while (processingDate.isBefore(moment()));
   });
+
+
 
   return tasksByDay
 };
