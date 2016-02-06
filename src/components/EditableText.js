@@ -8,11 +8,6 @@ export class EditableText extends React.Component {
     super();
     this.state = { isRenaming: false, text: props.text };
   }
-  static propTypes = {
-    text: React.PropTypes.string.isRequired,
-    style: React.PropTypes.object,
-    onTextChanged: React.PropTypes.func.isRequired
-  };
   handleChange(event) {
     this.setState({ ...this.state, text: event.target.value });
   }
@@ -32,3 +27,9 @@ export class EditableText extends React.Component {
           : <span style={{ cursor: 'pointer', ...style }} onClick={() => this.handleStartRenaming()}>{originalText}</span>;
   }  
 }
+
+EditableText.propTypes = {
+  text: React.PropTypes.string.isRequired,
+  style: React.PropTypes.object,
+  onTextChanged: React.PropTypes.func.isRequired
+};

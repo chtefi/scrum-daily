@@ -25,17 +25,6 @@ const createGroup = (userId, date, tasks, height, onClickTaskCheckbox, onRenamed
 // Pure component
 // 
 export class User extends React.Component {
-  constructor() {
-    super();
-  }
-  static propTypes = {
-    id: React.PropTypes.number.isRequired,
-    name: React.PropTypes.string.isRequired,
-    tasks: React.PropTypes.array.isRequired,
-    onCreateTaskClick: React.PropTypes.func.isRequired,
-    onClickTaskCheckbox: React.PropTypes.func.isRequired,
-    onRenamedTask: React.PropTypes.func.isRequired
-  };
   render() {
     const { id, name, tasks, onCreateTaskClick, onClickTaskCheckbox, onRenamedTask, onUserNameChanged } = this.props;
 
@@ -52,7 +41,14 @@ export class User extends React.Component {
     );
   }
 }
-
+User.propTypes = {
+  id: React.PropTypes.number.isRequired,
+  name: React.PropTypes.string.isRequired,
+  tasks: React.PropTypes.array.isRequired,
+  onCreateTaskClick: React.PropTypes.func.isRequired,
+  onClickTaskCheckbox: React.PropTypes.func.isRequired,
+  onRenamedTask: React.PropTypes.func.isRequired
+};
 
 //
 // Connected component

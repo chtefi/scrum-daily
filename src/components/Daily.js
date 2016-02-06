@@ -17,11 +17,6 @@ const STYLE_BUTTON = { margin: '10px 0' };
 const createUser = (props) => <li key={props.id} style={STYLE_USER}><User {...props} /></li>
 
 export class Daily extends React.Component {
-  static propTypes = {
-    users: React.PropTypes.array.isRequired,
-    onCreateUserClick: React.PropTypes.func.isRequired,
-  };
-
   render() {
     const { users, onCreateUserClick } = this.props;
 
@@ -35,6 +30,10 @@ export class Daily extends React.Component {
     );
   }
 }
+Daily.propTypes = {
+  users: React.PropTypes.array.isRequired,
+  onCreateUserClick: React.PropTypes.func.isRequired,
+};
 
 //
 // Connected component
