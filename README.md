@@ -6,9 +6,7 @@ WIP.
 
 # TODO
 
-- [ ] align days across people (should dynamic sizes per row)
 - [ ] ability to set any state on a task (propagating (blocked) OR not propagating (cancelled))
-- [ ] ability to add task on any day (if we forgot something)
 - [ ] add a counter next to each task to know how many days it spans
 - [ ] style
 - [ ] have some kind of different views? pluggable
@@ -16,6 +14,8 @@ WIP.
 - [ ] short-link system to access to an existing board ?
 - [ ] offline ?
 - [ ] create a distinct repo for EditableText
+- [x] align days across people (should dynamic sizes per row)
+- [x] ability to add task on any day (if we forgot something)
 - [x] save into localStorage for now
 - [x] ability to add a user
 - [x] ability to rename a user
