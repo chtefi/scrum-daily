@@ -5,7 +5,7 @@ import { getCreateTaskAction, getDoTaskAction, getUndoTaskAction, getRenameTaskA
 import { EditableText } from './EditableText.js';
 
 const STYLE_TASK_LIST = { margin: 0, padding: 0, listStyleType: 'none' };
-const STYLE_TASK_LIST_ITEM = { };
+const STYLE_TASK_LIST_ITEM = { fontSize: 14 };
 const STYLE_BUTTON = { border: '1px solid #ccc', cursor: 'pointer', padding: 0, width: 16, background: 'none', float: 'right' }
 
 const createTask = (task, yyyymmdd, onCheckedTask, onRenamedTask) =>

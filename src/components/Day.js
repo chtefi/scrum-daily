@@ -10,7 +10,7 @@ import { isPostWeekEnd } from '../tools/spanTasksByDay.js';
 // Pure component
 //
 
-const STYLE_USER_TASKLIST_ITEM = { minWidth: 250, maxWidth: 250, padding: 10 };
+const STYLE_USER_TASKLIST_ITEM = { minWidth: 250, maxWidth: 250, padding: 10, borderRight: '1px solid rgba(0,0,0,0.2)' };
 const STYLE_USER_TASKLIST = { margin: 0, padding: 0, listStyleType: 'none', display: 'flex' };
 const STYLE_CONTAINER = (isPostWeekEnd) => ({ background: 'white', borderRadius: 5, boxShadow: '3px 3px 10px rgba(0,0,0,.1)', border: '1px solid rgba(0,0,0,.2)', marginTop: 10, marginBottom: (isPostWeekEnd ? 50 : 0) });
 
