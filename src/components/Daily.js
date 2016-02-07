@@ -19,7 +19,7 @@ const STYLE_USER_ITEM = { paddingBottom: 10, fontWeight: 800, minWidth: 250, max
 const STYLE_WEEK = { fontWeight: 'bold', fontSize: 24, padding: 10, marginTop: 50 };
 
 const createWeekDays = ({ n, days }) =>
-  <li>
+  <li key={n}>
     <header style={STYLE_WEEK}>Week {n}</header>
     <ul className="days" style={STYLE_DAY_LIST}>{days.map(createDay)}</ul>
   </li>;
