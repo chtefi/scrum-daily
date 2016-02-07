@@ -14,7 +14,7 @@ import Day from './Day.js';
 const STYLE_DAY_LIST = { listStyleType: 'none', margin: 0, padding: 0, display: 'inline-block' };
 const STYLE_USER_LIST = { listStyleType: 'none', margin: 0, padding: 0, display: 'flex' };
 const STYLE_BUTTON = { margin: '10px 0' };
-const STYLE_USER_ITEM = { paddingBottom: 10, fontWeight: 800, minWidth: 250, maxWidth: 250, padding: 10, textAlign: 'center', background: 'rgba(0,0,0,0.2)' };
+const STYLE_USER_ITEM = { paddingBottom: 10, fontWeight: 800, minWidth: 250, maxWidth: 250, padding: 10, background: 'rgba(0,0,0,0.2)' };
 
 
 const createDay = (dayProps) => <li key={dayProps.date}><Day {...dayProps} /></li>;

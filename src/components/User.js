@@ -4,15 +4,19 @@ import { connect } from 'react-redux';
 import { getRenameUserAction } from '../actions/all.js';
 import { EditableText } from './EditableText.js';
 
+
+const STYLE_IMAGE = { height: 32, marginRight: 10, verticalAlign: 'middle' };
+
 //
 // Pure component
 // 
 export class User extends React.Component {
   render() {
-    const { id, name, onUserNameChanged } = this.props;
+    const { id, name, photo, onUserNameChanged } = this.props;
 
     return (
       <header>
+        <img src={photo} style={STYLE_IMAGE} />
         <EditableText text={name} onTextChanged={(name) => onUserNameChanged(id, name)} />
       </header>
     );
@@ -31,6 +35,7 @@ User.propTypes = {
 const mapStateToProps = (state, props) => ({
   id: props.id,
   name: props.name,
+  photo: props.photo,
 });
 const dispatchToProps = (dispatch) => ({
   onUserNameChanged: (userId, name) => dispatch(getRenameUserAction(userId, name)),
