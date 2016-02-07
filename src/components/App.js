@@ -24,7 +24,13 @@ const DEFAULT_STATE = {
 };
 
 const storeEnhancer = applyMiddleware(logState, logAction);
-const createPersistentStore = compose(persistState(), DevTools.instrument())(createStore);
+
+// TODO(sd): Ultra ugly for now, must create distinct files to the stores, and for the root component
+// because right now, we import the whole stuff in the production bundle : it sucks.
+// https://github.com/gaearon/redux-devtools/blob/master/docs/Walkthrough.md
+const isProduction = (process.env.NODE_ENV === 'production');
+
+const createPersistentStore = compose(persistState(), (!isProduction ? DevTools.instrument() : null))(createStore);
 const createEnhancedStore = storeEnhancer(createPersistentStore);
 const store = createEnhancedStore(reducer, DEFAULT_STATE);
 
@@ -43,7 +49,7 @@ export default class extends React.Component {
         <Provider store={store}>
           <div>
             <Daily />
-            <DevTools />
+            { !isProduction && <DevTools /> }
           </div>
         </Provider>
       </div>
