@@ -19,7 +19,7 @@ const STYLE_WEEK = (isExpanded) => ({ marginBottom: (isExpanded ? 40 : 0) });
 
 const createWeekDays = (n, days, isExpanded, toggleWeekVisibility) =>
   <li key={n} style={STYLE_WEEK(isExpanded)}>
-    <header style={STYLE_WEEK_HEADER}><i className="fa fa-calendar"></i> Week {n} 
+    <header style={STYLE_WEEK_HEADER}><i style={{color: '#888'}} className="fa fa-calendar"></i> Week {n} 
       <button style={STYLE_BUTTON_PLAIN} onClick={() => toggleWeekVisibility(n)}>
         {isExpanded ? <i className="fa fa-chevron-up"></i> : <i className="fa fa-chevron-down"></i>}
       </button>

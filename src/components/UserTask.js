@@ -8,6 +8,7 @@ const STYLE_TASK_LIST_ITEM = { fontSize: 14, display: 'flex' };
 const STYLE_BUTTON = { border: 0, cursor: 'pointer', padding: 0, height: 16, width: 16, color: '#888', background: 'none', float: 'right' };
 const STYLE_CHECK_BUTTON = { border: 0, cursor: 'pointer', padding: 0, width: 10, color: '#444', background: 'none', marginRight: 5 };
 const STYLE_DAY_SPAN = { color: '#888', fontSize: 11 };
+
 //
 // Pure component
 //
@@ -25,7 +26,7 @@ export class UserTask extends React.Component {
         <div style={{flex: 1}}>
           <EditableText style={task.done ? { textDecoration: 'line-through'} : null} text={task.text}
                         onTextChanged={(text) => onRenamedTask(task.id, text)}
-                        onEnter={() => onCreateTask(userId, yyyymmdd)} />
+                        onEnter={() => {}} />
           { task.span > 1 ? <span style={STYLE_DAY_SPAN}> ({task.span}d)</span> : '' /* \u00A0 is the &nbps; */}
           <button style={STYLE_BUTTON} onClick={() => onDeleteTask(task.id)}><i className="fa fa-times"></i></button>
         </div>

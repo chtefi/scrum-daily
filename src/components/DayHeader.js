@@ -12,7 +12,7 @@ export class DayHeader extends React.Component {
   render() {
     const { date } = this.props;
     return (
-      <header style={STYLE_HEADER}>{moment(date).format('MMM DD')} <i className="fa fa-angle-double-right"></i> {moment(date).format('dddd')}</header>
+      <header style={STYLE_HEADER}>{moment(date).format('MMM DD')} <i style={{color: '#888' }} className="fa fa-angle-double-right"></i> {moment(date).format('dddd')}</header>
     );
   }
 }
