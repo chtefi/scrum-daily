@@ -12,20 +12,33 @@ const NEW_TASK_NAME = 'New Task';
 //  { ... }
 // ]
 
-let lastUserId = 10;
-let lastTaskId = 10;
-const createNewUser = () => ({ id: lastUserId++, name: NEW_USER_NAME, tasks: [] });
-const createNewTask = (yyyymmdd) => ({ id: lastTaskId++, text: NEW_TASK_NAME, cdate: yyyymmdd, ddate: null });
+const createNewUser = (maxUserId) => ({ id: maxUserId + 1, name: NEW_USER_NAME, tasks: [] });
+const createNewTask = (yyyymmdd, maxTaskId) => ({ id: maxTaskId + 1, text: NEW_TASK_NAME, cdate: yyyymmdd, ddate: null });
 
 const mapOnlyFiltered = (filter, mapper) => (array) => array.map(item => filter(item) ? mapper(item) : item)
-const addTaskToUser = (userId, yyyymmdd) => mapOnlyFiltered(
-  (user) => user.id === userId,
-  (user) => ({ ...user, tasks: user.tasks.concat(createNewTask(yyyymmdd)) })
-);
+const addTaskToUser = (userId, yyyymmdd) => (tasks) => {
+  const maxTaskId = getMaxTaskId(tasks);
+  return mapOnlyFiltered(
+    (user) => user.id === userId,
+    (user) => ({ ...user, tasks: user.tasks.concat(createNewTask(yyyymmdd, maxTaskId)) })
+  )(tasks);
+};
+
+// generic pure function to get the max of a nested property in arrays of arrays
+const getMaxNestedProperty =
+  (childArrayProperty, childProperty) =>
+    (array) =>
+      array.reduce((max, item) =>
+        Math.max(item[childArrayProperty].reduce((max, subItem) =>
+          Math.max(subItem[childProperty], max), 0), max), 0);
+
+const getMaxTaskId = getMaxNestedProperty('tasks', 'id');
+
 const renameUser = (userId, name) => mapOnlyFiltered(
   (user) => user.id === userId,
   (user) => ({ ...user, name })
 );
+const getMaxUserId = (users) => users.reduce((max, user) => Math.max(user.id, max), 0);
 
 const changeTaskStatus = (taskId, yyyymmdd, property) => mapOnlyFiltered(
   (user) => find(user, u => find(u.tasks, t => t.id === taskId) !== null),
@@ -44,7 +57,7 @@ const deleteTask = (taskId) => mapOnlyFiltered(
 }));
 
 export default (state = {}, action) =>
-  action.type === CREATE_USER ? state.concat(createNewUser(NEW_USER_NAME)) :
+  action.type === CREATE_USER ? state.concat(createNewUser(getMaxUserId(state))) :
   action.type === CREATE_TASK ? addTaskToUser(action.userId, action.yyyymmdd)(state) :
   action.type === RENAME_USER ? renameUser(action.userId, action.name)(state) :
   action.type === DO_TASK     ? changeTaskStatus(action.taskId, action.yyyymmdd, 'ddate')(state) :
