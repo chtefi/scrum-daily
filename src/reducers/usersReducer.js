@@ -1,6 +1,6 @@
 import find from 'lodash/find';
 
-import { CREATE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK, RENAME_USER, DELETE_TASK } from '../actions/types.js';
+import { CREATE_USER, DELETE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK, RENAME_USER, DELETE_TASK } from '../actions/types.js';
 
 const NEW_USER_NAME = 'New User';
 const NEW_TASK_NAME = 'New Task';
@@ -56,8 +56,11 @@ const deleteTask = (taskId) => mapOnlyFiltered(
     tasks: user.tasks.filter(task => task.id !== taskId)
 }));
 
+const deleteUser = (userId) => (users) => users.filter(user => user.id !== userId);
+
 export default (state = {}, action) =>
   action.type === CREATE_USER ? state.concat(createNewUser(getMaxUserId(state))) :
+  action.type === DELETE_USER ? deleteUser(action.userId)(state) :
   action.type === CREATE_TASK ? addTaskToUser(action.userId, action.yyyymmdd)(state) :
   action.type === RENAME_USER ? renameUser(action.userId, action.name)(state) :
   action.type === DO_TASK     ? changeTaskStatus(action.taskId, action.yyyymmdd, 'ddate')(state) :

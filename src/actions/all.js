@@ -1,6 +1,7 @@
-import { CREATE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK, DELETE_TASK, RENAME_USER, TOGGLE_WEEK_VISIBILITY, SET_WEEK_VISIBILITY } from './types.js';
+import { CREATE_USER, DELETE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK, DELETE_TASK, RENAME_USER, TOGGLE_WEEK_VISIBILITY, SET_WEEK_VISIBILITY } from './types.js';
 
 const getCreateUserAction = () => ({ type: CREATE_USER });
+const getDeleteUserAction = (userId) => ({ type: DELETE_USER, userId });
 const getCreateTaskAction = (userId, yyyymmdd) => ({ type: CREATE_TASK, userId, yyyymmdd });
 const getDoTaskAction = (taskId, yyyymmdd) => ({ type: DO_TASK, taskId, yyyymmdd });
 const getUndoTaskAction = (taskId) => ({ type: UNDO_TASK, taskId });
@@ -12,6 +13,7 @@ const getSetWeekVisibility = (weekNumber) => ({ type: SET_WEEK_VISIBILITY, weekN
 
 export {
   getCreateUserAction,
+  getDeleteUserAction,
   getCreateTaskAction,
   getDoTaskAction,
   getUndoTaskAction,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import spanTasksByDay from '../tools/spanTasksByDay.js';
 import groupByWeeks from '../tools/groupByWeeks.js';
-import { getCreateUserAction, getToggleWeekVisibility } from '../actions/all.js';
+import { getToggleWeekVisibility } from '../actions/all.js';
 
 import Day from './Day.js';
 import UserList from './UserList.js';
@@ -35,12 +35,11 @@ const createDay = (dayProps) =>
 
 export class Daily extends React.Component {
   render() {
-    const { days, weeksVisibility, onCreateUserClick, onToggleWeekVisibility } = this.props;
+    const { days, weeksVisibility, onToggleWeekVisibility } = this.props;
     const weeks = groupByWeeks(days);
 
     return (
       <div>
-        <button className="button" onClick={() => onCreateUserClick()}>Add a user</button>
         <ul className="weeks">
           {weeks.map(week => createWeekDays(week.n, week.days, weeksVisibility[week.n] === undefined ? true : weeksVisibility[week.n], onToggleWeekVisibility))}
         </ul>
@@ -51,7 +50,6 @@ export class Daily extends React.Component {
 Daily.propTypes = {
   days: React.PropTypes.array.isRequired,
   weeksVisibility: React.PropTypes.object.isRequired,
-  onCreateUserClick: React.PropTypes.func.isRequired,
   onToggleWeekVisibility: React.PropTypes.func.isRequired,
 };
 
@@ -64,7 +62,6 @@ const mapStateToProps = (state) => ({
   days: spanTasksByDay(state.users)
 });
 const mapDispatchToProps = (dispatch) => ({
-  onCreateUserClick: () => dispatch(getCreateUserAction()),
   onToggleWeekVisibility: (weekNumber) => dispatch(getToggleWeekVisibility(weekNumber)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Daily);
