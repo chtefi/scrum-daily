@@ -8,7 +8,6 @@ WIP.
 
 Must-have :
 
-- [ ] ability to set any state on a task (propagating (blocked) OR not propagating (cancelled))
 - [ ] style
 - [ ] Firebase as database?
 - [ ] short-link system to access to an existing board?
@@ -34,3 +33,7 @@ Less important :
 - [ ] add an export function (json? txt? doc?)
 - [ ] have some kind of different views? pluggable
 - [ ] offline?
+
+Disregard?
+
+- [ ] ability to set any state on a task (propagating (blocked) OR not propagating (cancelled))
