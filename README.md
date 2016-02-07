@@ -28,6 +28,7 @@ Must-have :
 
 Less important :
 
+- [ ] ability to have comments for a task? (explaining more stuff)
 - [ ] ability to have subtasks?
 - [ ] create a distinct repo for EditableText
 - [ ] add an export function (json? txt? doc?)
