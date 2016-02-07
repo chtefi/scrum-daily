@@ -5,7 +5,7 @@ import moment from 'moment';
 // Pure component
 //
 
-const STYLE_HEADER = { fontWeight: 'bold', fontSize: 18, padding: '10px 0' }
+const STYLE_HEADER = { fontWeight: 'bold', fontSize: 18, padding: 10, borderBottom: '1px solid rgba(0,0,0,0.3)' }
 
 // TODO(sd): function component syntax ?
 export class DayHeader extends React.Component {

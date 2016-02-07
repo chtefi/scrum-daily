@@ -6,6 +6,7 @@ import { EditableText } from './EditableText.js';
 
 const STYLE_TASK_LIST = { margin: 0, padding: 0, listStyleType: 'none' };
 const STYLE_TASK_LIST_ITEM = { };
+const STYLE_BUTTON = { border: '1px solid #ccc', cursor: 'pointer', padding: 0, width: 16, background: 'none', float: 'right' }
 
 const createTask = (task, yyyymmdd, onCheckedTask, onRenamedTask) =>
   <li key={task.id} style={STYLE_TASK_LIST_ITEM}>
@@ -23,7 +24,7 @@ export class UserTaskList extends React.Component {
     const { userId, yyyymmdd, tasks, onCheckedTask, onRenamedTask, onCreateTask } = this.props;
     return (
       <div>
-        <button onClick={() => onCreateTask(userId, yyyymmdd)}>+</button>
+        <button style={STYLE_BUTTON} onClick={() => onCreateTask(userId, yyyymmdd)}>+</button>
         <ul className="tasks" style={STYLE_TASK_LIST}>
           {tasks.map(task => createTask(task, yyyymmdd, onCheckedTask, onRenamedTask))}
         </ul>
