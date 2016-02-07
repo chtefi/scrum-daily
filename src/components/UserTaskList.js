@@ -5,14 +5,18 @@ import { getCreateTaskAction, getDoTaskAction, getUndoTaskAction, getRenameTaskA
 import { EditableText } from './EditableText.js';
 
 const STYLE_TASK_LIST = { margin: 0, padding: 0, listStyleType: 'none' };
-const STYLE_TASK_LIST_ITEM = { fontSize: 14 };
+const STYLE_TASK_LIST_ITEM = { fontSize: 14, display: 'flex' };
 const STYLE_BUTTON = { border: '1px solid #ccc', cursor: 'pointer', padding: 0, width: 16, background: 'none', float: 'right' }
 
 const createTask = (userId, task, yyyymmdd, onCheckedTask, onRenamedTask, onCreateTask, onDeleteTask) =>
   <li key={task.id} style={STYLE_TASK_LIST_ITEM}>
-    <input type="checkbox" checked={task.done} onChange={() => onCheckedTask(task.id, yyyymmdd, task.done)} />
-    <EditableText style={task.done ? { textDecoration: 'line-through'} : null} text={task.text} onTextChanged={(text) => onRenamedTask(task.id, text)} onEnter={() => onCreateTask(userId, yyyymmdd)} />
-    <button style={STYLE_BUTTON} onClick={() => onDeleteTask(task.id)}>-</button>
+    <div>
+      <input type="checkbox" checked={task.done} onChange={() => onCheckedTask(task.id, yyyymmdd, task.done)} />
+    </div>
+    <div style={{flex: 1}}>
+      <EditableText style={task.done ? { textDecoration: 'line-through'} : null} text={task.text} onTextChanged={(text) => onRenamedTask(task.id, text)} onEnter={() => onCreateTask(userId, yyyymmdd)} />
+      <button style={STYLE_BUTTON} onClick={() => onDeleteTask(task.id)}>-</button>
+    </div>
   </li>;
 
 //
