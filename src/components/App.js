@@ -24,7 +24,7 @@ const DEFAULT_STATE = {
 };
 
 const storeEnhancer = applyMiddleware(logState, logAction);
-const createPersistentStore = compose(/*persistState(), */DevTools.instrument())(createStore);
+const createPersistentStore = compose(persistState(), DevTools.instrument())(createStore);
 const createEnhancedStore = storeEnhancer(createPersistentStore);
 const store = createEnhancedStore(reducer, DEFAULT_STATE);
 
