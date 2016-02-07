@@ -14,6 +14,8 @@ WIP.
 - [ ] short-link system to access to an existing board ?
 - [ ] offline ?
 - [ ] create a distinct repo for EditableText
+- [ ] add an export function (json? txt? doc?)
+- [ ] expand/collapse previous weeks
 - [x] align days across people (should dynamic sizes per row)
 - [x] ability to add task on any day (if we forgot something)
 - [x] save into localStorage for now
