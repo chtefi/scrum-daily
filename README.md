@@ -15,6 +15,7 @@ WIP.
 - [ ] Firebase as database?
 - [ ] short-link system to access to an existing board ?
 - [ ] offline ?
+- [ ] create a distinct repo for EditableText
 - [x] save into localStorage for now
 - [x] ability to add a user
 - [x] ability to rename a user

@@ -14,10 +14,19 @@ import DevTools from './DevTools.js';
 const STYLE_APP = { color: 'black', fontFamily: 'Roboto', padding: 10 };
 const STYLE_TITLE = { fontSize: 30, fontFamily: 'Roboto', fontWeight: 'bold', margin: 0, padding: 10, backgroundColor: 'rgba(0,0,0,0.5)', color: '#eee' };
 
+
+const DEFAULT_STATE = {
+  users: [
+    { id: 1, name: 'JC', tasks: [ { id: 1, text: 'Trying to make the state works', cdate: '2016-01-27', ddate: '2016-02-01' }, { id: 2, text: 'Trying to find which background-color fits', cdate: '2016-02-01', ddate: '2016-02-03' } ]},
+    { id: 2, name: 'JR', tasks: [ { id: 3, text: 'Refactor the whole project', cdate: '2016-02-01', ddate: '2016-02-03' }, { id: 4, text: 'Sending some emails', cdate: '2016-02-01', ddate: null } ]},
+    { id: 3, name: 'JP', tasks: [ { id: 5, text: 'Do some big data', cdate: '2016-02-04', ddate: null }, { id: 6, text: 'Create a new JS framework', cdate: '2016-02-02', ddate: null } ]},
+  ]
+};
+
 const storeEnhancer = applyMiddleware(logState, logAction);
-const createPersistentStore = compose(persistState(), DevTools.instrument())(createStore);
+const createPersistentStore = compose(/*persistState(), */DevTools.instrument())(createStore);
 const createEnhancedStore = storeEnhancer(createPersistentStore);
-const store = createEnhancedStore(reducer);
+const store = createEnhancedStore(reducer, DEFAULT_STATE);
 
 // The store will injected into the React context.
 // To get it back, components must be wrapped with : connect()(Component)
