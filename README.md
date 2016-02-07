@@ -6,16 +6,13 @@ WIP.
 
 # TODO
 
+Must-have :
+
 - [ ] ability to set any state on a task (propagating (blocked) OR not propagating (cancelled))
 - [ ] add a counter next to each task to know how many days it spans
 - [ ] style
-- [ ] have some kind of different views? pluggable
 - [ ] Firebase as database?
 - [ ] short-link system to access to an existing board?
-- [ ] offline?
-- [ ] ability to have subtasks?
-- [ ] create a distinct repo for EditableText
-- [ ] add an export function (json? txt? doc?)
 - [x] expand/collapse previous weeks
 - [x] ability to delete a task
 - [x] align days across people (should dynamic sizes per row)
@@ -28,3 +25,11 @@ WIP.
 - [x] don't display week-ends
 - [x] ability to rename a task
 - [x] create day even on empty days
+
+Less important :
+
+- [ ] ability to have subtasks?
+- [ ] create a distinct repo for EditableText
+- [ ] add an export function (json? txt? doc?)
+- [ ] have some kind of different views? pluggable
+- [ ] offline?

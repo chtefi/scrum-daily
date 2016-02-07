@@ -66,7 +66,7 @@ Daily.propTypes = {
 
 const mapStateToProps = (state) => ({
   users: state.users,
-  weeksVisibility: state.weeksVisibility,
+  weeksVisibility: state.weeks,
   days: spanTasksByDay(state.users)
 });
 const mapDispatchToProps = (dispatch) => ({

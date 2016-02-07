@@ -5,7 +5,7 @@ import persistState from 'redux-localstorage';
 
 import logState from '../middlewares/logState.js';
 import logAction from '../middlewares/logAction.js';
-import reducer from '../reducers/dailyState';
+import reducer from '../reducers';
 
 import Daily from './Daily.js';
 import DevTools from './DevTools.js';
@@ -20,7 +20,7 @@ const DEFAULT_STATE = {
     { id: 2, name: 'JR', photo: 'https://randomuser.me/api/portraits/thumb/men/91.jpg', tasks: [ { id: 3, text: 'Refactor the whole project', cdate: '2016-02-01', ddate: '2016-02-03' }, { id: 4, text: 'Sending some emails', cdate: '2016-02-01', ddate: null } ]},
     { id: 3, name: 'JP', photo: 'https://randomuser.me/api/portraits/thumb/men/90.jpg', tasks: [ { id: 5, text: 'Do some big data', cdate: '2016-02-04', ddate: null }, { id: 6, text: 'Create a new JS framework', cdate: '2016-02-02', ddate: null } ]},
   ],
-  weeksVisibility: {}
+  weeks: {}
 };
 
 const storeEnhancer = applyMiddleware(logState, logAction);

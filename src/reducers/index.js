@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-import daily from './dailyState.js';
+import users from './usersReducer.js';
+import weeks from './weeksReducer.js';
 
 export default combineReducers({
-  daily,
+  users,
+  weeks
 });
