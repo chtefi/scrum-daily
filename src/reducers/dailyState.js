@@ -1,6 +1,6 @@
 import find from 'lodash/find';
 
-import { CREATE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK, RENAME_USER } from '../actions/types.js';
+import { CREATE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK, RENAME_USER, DELETE_TASK } from '../actions/types.js';
 
 const NEW_USER_NAME = 'New User';
 const NEW_TASK_NAME = 'New Task';
@@ -36,6 +36,12 @@ const changeTaskStatus = (taskId, yyyymmdd, property) => mapOnlyFiltered(
       (task) => ({ ...task, [property]: yyyymmdd })
     )(user.tasks)
 }));
+const deleteTask = (taskId) => mapOnlyFiltered(
+  (user) => find(user, u => find(u.tasks, t => t.id === taskId) !== null),
+  (user) => ({
+    ...user,
+    tasks: user.tasks.filter(task => task.id !== taskId)
+}));
 
 export default (state, action) =>
   action.type === CREATE_USER ? { ...state, users: state.users.concat(createNewUser(NEW_USER_NAME)) } :
@@ -44,4 +50,5 @@ export default (state, action) =>
   action.type === DO_TASK ?     { ...state, users: changeTaskStatus(action.taskId, action.yyyymmdd, 'ddate')(state.users) } :
   action.type === UNDO_TASK ?   { ...state, users: changeTaskStatus(action.taskId, null, 'ddate')(state.users) } :
   action.type === RENAME_TASK ? { ...state, users: changeTaskStatus(action.taskId, action.text, 'text')(state.users) } :
+  action.type === DELETE_TASK ? { ...state, users: deleteTask(action.taskId)(state.users) } :
   state;
