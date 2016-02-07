@@ -16,7 +16,7 @@ export class User extends React.Component {
 
     return (
       <header>
-        <img src={photo} style={STYLE_IMAGE} />
+        <img src={"http://www.sheffield.com/wp-content/uploads/2013/06/placeholder.png" || photo} style={STYLE_IMAGE} />
         <EditableText text={name} onTextChanged={(name) => onUserNameChanged(id, name)} />
       </header>
     );
