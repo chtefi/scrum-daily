@@ -5,7 +5,7 @@ import { getCreateTaskAction } from '../actions/all.js';
 import UserTask from './UserTask.js';
 
 const STYLE_TASK_LIST = { margin: 0, padding: 0, listStyleType: 'none' };
-const STYLE_BUTTON = { border: '1px solid #ccc', cursor: 'pointer', padding: 0, width: 16, background: 'none', float: 'right' };
+const STYLE_BUTTON = { border: 0, cursor: 'pointer', padding: 0, color: '#444', background: 'none' };
 
 //
 // Pure component
@@ -17,7 +17,9 @@ export class UserTaskList extends React.Component {
     const { userId, yyyymmdd, tasks, onCreateTask } = this.props;
     return (
       <div>
-        <div style={{overflow: 'auto'}}><button style={STYLE_BUTTON} onClick={() => onCreateTask(userId, yyyymmdd)}>+</button></div>
+        <div style={{overflow: 'auto'}}>
+          <button style={STYLE_BUTTON} onClick={() => onCreateTask(userId, yyyymmdd)}><i className="fa fa-plus"></i></button>
+        </div>
         <ul className="tasks" style={STYLE_TASK_LIST}>
           {tasks.map(task => <UserTask key={task.id} userId={userId} yyyymmdd={yyyymmdd} task={task} />)}
         </ul>

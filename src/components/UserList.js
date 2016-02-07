@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import User from './User.js';
 
 const STYLE_USER_LIST = { listStyleType: 'none', margin: 0, padding: 0, display: 'flex' };
-const STYLE_USER_ITEM = { fontWeight: 800, minWidth: 250, maxWidth: 250, padding: 10, textAlign: 'center' };
+const STYLE_USER_ITEM = { fontWeight: 800, minWidth: 250, maxWidth: 250, padding: 10, textAlign: 'center', overflow: 'hidden' };
 
 const createUser = (userProps) =>
   <li key={userProps.id} style={STYLE_USER_ITEM}>

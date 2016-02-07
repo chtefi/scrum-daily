@@ -11,7 +11,7 @@ import Daily from './Daily.js';
 import DevTools from './DevTools.js';
 
 const STYLE_APP = { color: 'black', fontFamily: 'Roboto', padding: 10 };
-const STYLE_TITLE = { fontSize: 30, fontFamily: 'Roboto', fontWeight: 'bold', margin: 0, padding: 10, backgroundColor: 'rgba(0,0,0,0.5)', color: '#eee' };
+const STYLE_TITLE = { fontSize: 30, fontFamily: 'Roboto', fontWeight: 'bold', margin: 0, marginBottom: 10, padding: 10, backgroundColor: 'rgba(0,0,0,0.5)', color: '#eee', borderRadius: 5 };
 
 
 const DEFAULT_STATE = {
