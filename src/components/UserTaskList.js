@@ -8,10 +8,10 @@ const STYLE_TASK_LIST = { margin: 0, padding: 0, listStyleType: 'none' };
 const STYLE_TASK_LIST_ITEM = { fontSize: 14 };
 const STYLE_BUTTON = { border: '1px solid #ccc', cursor: 'pointer', padding: 0, width: 16, background: 'none', float: 'right' }
 
-const createTask = (task, yyyymmdd, onCheckedTask, onRenamedTask) =>
+const createTask = (userId, task, yyyymmdd, onCheckedTask, onRenamedTask, onCreateTask) =>
   <li key={task.id} style={STYLE_TASK_LIST_ITEM}>
     <input type="checkbox" checked={task.done} onChange={() => onCheckedTask(task.id, yyyymmdd, task.done)} />
-    <EditableText style={task.done ? { textDecoration: 'line-through'} : null} text={task.text} onTextChanged={(text) => onRenamedTask(task.id, text)} />
+    <EditableText style={task.done ? { textDecoration: 'line-through'} : null} text={task.text} onTextChanged={(text) => onRenamedTask(task.id, text)} onEnter={() => onCreateTask(userId, yyyymmdd)} />
   </li>;
 
 //
@@ -26,7 +26,7 @@ export class UserTaskList extends React.Component {
       <div>
         <button style={STYLE_BUTTON} onClick={() => onCreateTask(userId, yyyymmdd)}>+</button>
         <ul className="tasks" style={STYLE_TASK_LIST}>
-          {tasks.map(task => createTask(task, yyyymmdd, onCheckedTask, onRenamedTask))}
+          {tasks.map(task => createTask(userId, task, yyyymmdd, onCheckedTask, onRenamedTask, onCreateTask))}
         </ul>
       </div>
     );

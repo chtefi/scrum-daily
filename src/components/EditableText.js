@@ -11,19 +11,28 @@ export class EditableText extends React.Component {
   handleChange(event) {
     this.setState({ ...this.state, text: event.target.value });
   }
+  handleKeyPress(event) {
+    if (event.charCode === 13) {
+      this.handleEndRenaming();
+      this.props.onEnter && this.props.onEnter();
+    }
+  }
   handleStartRenaming() {
     this.setState({ text: this.props.text, isRenaming: true });
   }
   handleEndRenaming() {
    this.setState({ ...this.state, isRenaming: false }); 
-   this.props.onTextChanged(this.state.text);
+   this.props.onTextChanged && this.props.onTextChanged(this.state.text);
   }
   render() {
     const { style, text: originalText } = this.props;
     const { isRenaming, text } = this.state;
 
     return isRenaming
-          ? <input onBlur={() => this.handleEndRenaming()} autoFocus onChange={(e) => this.handleChange(e)} value={text} />
+          ? <input onBlur={() => this.handleEndRenaming()} autoFocus
+              onChange={(e) => this.handleChange(e)}
+              onKeyPress={(e) => this.handleKeyPress(e)}
+              value={text} />
           : <span style={{ cursor: 'pointer', ...style }} onClick={() => this.handleStartRenaming()}>{originalText}</span>;
   }  
 }
@@ -31,5 +40,6 @@ export class EditableText extends React.Component {
 EditableText.propTypes = {
   text: React.PropTypes.string.isRequired,
   style: React.PropTypes.object,
-  onTextChanged: React.PropTypes.func.isRequired
+  onTextChanged: React.PropTypes.func,
+  onEnter: React.PropTypes.func,
 };
