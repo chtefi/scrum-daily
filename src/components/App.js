@@ -30,7 +30,7 @@ const storeEnhancer = applyMiddleware(logState, logAction);
 // https://github.com/gaearon/redux-devtools/blob/master/docs/Walkthrough.md
 const isProduction = (process.env.NODE_ENV === 'production');
 
-const createPersistentStore = compose(persistState(), (!isProduction ? DevTools.instrument() : null))(createStore);
+const createPersistentStore = (isProduction ? compose(persistState())(createStore) : compose(persistState(), DevTools.instrument())(createStore));
 const createEnhancedStore = storeEnhancer(createPersistentStore);
 const store = createEnhancedStore(reducer, DEFAULT_STATE);
 
