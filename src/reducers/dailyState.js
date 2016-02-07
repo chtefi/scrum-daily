@@ -1,6 +1,6 @@
 import find from 'lodash/find';
 
-import { CREATE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK, RENAME_USER, DELETE_TASK } from '../actions/types.js';
+import { CREATE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK, RENAME_USER, DELETE_TASK, TOGGLE_WEEK_VISIBILITY, SET_WEEK_VISIBILITY } from '../actions/types.js';
 
 const NEW_USER_NAME = 'New User';
 const NEW_TASK_NAME = 'New Task';
@@ -43,6 +43,10 @@ const deleteTask = (taskId) => mapOnlyFiltered(
     tasks: user.tasks.filter(task => task.id !== taskId)
 }));
 
+// before: { 41: false, 42: true } / toggleWeekVisibility(42)(map) / after:  { 41: false, 42: false }
+const toggleWeekVisibility = (weekNumber) => (map) => ({ ...map, [weekNumber]: (map[weekNumber] === undefined ? false : !map[weekNumber]) });
+const setWeekVisibility = (weekNumber) => (map) => ({ ...map, [weekNumber]: true });
+
 export default (state, action) =>
   action.type === CREATE_USER ? { ...state, users: state.users.concat(createNewUser(NEW_USER_NAME)) } :
   action.type === CREATE_TASK ? { ...state, users: addTaskToUser(action.userId, action.yyyymmdd)(state.users) } :
@@ -51,4 +55,6 @@ export default (state, action) =>
   action.type === UNDO_TASK ?   { ...state, users: changeTaskStatus(action.taskId, null, 'ddate')(state.users) } :
   action.type === RENAME_TASK ? { ...state, users: changeTaskStatus(action.taskId, action.text, 'text')(state.users) } :
   action.type === DELETE_TASK ? { ...state, users: deleteTask(action.taskId)(state.users) } :
+  action.type === TOGGLE_WEEK_VISIBILITY ? { ...state, weeksVisibility: toggleWeekVisibility(action.weekNumber)(state.weeksVisibility) } :
+  action.type === SET_WEEK_VISIBILITY ?    { ...state, weeksVisibility: setWeekVisibility(action.weekNumber)(state.weeksVisibility) } :
   state;

@@ -16,7 +16,7 @@ WIP.
 - [ ] ability to draw a tiny progress chart using some special text ie: "2/3"
 - [ ] create a distinct repo for EditableText
 - [ ] add an export function (json? txt? doc?)
-- [ ] expand/collapse previous weeks
+- [x] expand/collapse previous weeks
 - [x] ability to delete a task
 - [x] align days across people (should dynamic sizes per row)
 - [x] ability to add task on any day (if we forgot something)

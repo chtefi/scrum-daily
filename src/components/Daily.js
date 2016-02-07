@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import spanTasksByDay from '../tools/spanTasksByDay.js';
 import groupByWeeks from '../tools/groupByWeeks.js';
-import { getCreateUserAction } from '../actions/all.js';
+import { getCreateUserAction, getToggleWeekVisibility } from '../actions/all.js';
 
 import User from './User.js';
 import Day from './Day.js';
@@ -18,10 +18,10 @@ const STYLE_BUTTON = { margin: '10px 0' };
 const STYLE_USER_ITEM = { paddingBottom: 10, fontWeight: 800, minWidth: 250, maxWidth: 250, padding: 10, background: 'rgba(0,0,0,0.2)' };
 const STYLE_WEEK = { fontWeight: 'bold', fontSize: 24, padding: 10, marginTop: 50 };
 
-const createWeekDays = ({ n, days }) =>
+const createWeekDays = (n, days, isExpanded, toggleWeekVisibility) =>
   <li key={n}>
-    <header style={STYLE_WEEK}>Week {n}</header>
-    <ul className="days" style={STYLE_DAY_LIST}>{days.map(createDay)}</ul>
+    <header style={STYLE_WEEK}>Week {n} <button onClick={() => toggleWeekVisibility(n)}>{isExpanded ? '-' : '+'}</button></header>
+    { isExpanded && <ul className="days" style={STYLE_DAY_LIST}>{days.map(createDay)}</ul> }
   </li>;
 
 const createDay = (dayProps) =>
@@ -36,8 +36,7 @@ const createUser = (userProps) =>
 
 export class Daily extends React.Component {
   render() {
-    const { users, days, onCreateUserClick } = this.props;
-
+    const { users, days, weeksVisibility, onCreateUserClick, onToggleWeekVisibility } = this.props;
     const weeks = groupByWeeks(days);
 
     return (
@@ -47,7 +46,7 @@ export class Daily extends React.Component {
           {users.map(createUser)}
         </ul>
         <ul className="weeks">
-          {weeks.map(createWeekDays)}
+          {weeks.map(week => createWeekDays(week.n, week.days, weeksVisibility[week.n] === undefined ? true : weeksVisibility[week.n], onToggleWeekVisibility))}
         </ul>
       </div>
     );
@@ -56,7 +55,9 @@ export class Daily extends React.Component {
 Daily.propTypes = {
   users: React.PropTypes.array.isRequired,
   days: React.PropTypes.array.isRequired,
+  weeksVisibility: React.PropTypes.array.isRequired,
   onCreateUserClick: React.PropTypes.func.isRequired,
+  onToggleWeekVisibility: React.PropTypes.func.isRequired,
 };
 
 //
@@ -65,9 +66,11 @@ Daily.propTypes = {
 
 const mapStateToProps = (state) => ({
   users: state.users,
+  weeksVisibility: state.weeksVisibility,
   days: spanTasksByDay(state.users)
 });
 const mapDispatchToProps = (dispatch) => ({
-  onCreateUserClick: () => dispatch(getCreateUserAction())
+  onCreateUserClick: () => dispatch(getCreateUserAction()),
+  onToggleWeekVisibility: (weekNumber) => dispatch(getToggleWeekVisibility(weekNumber)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Daily);
