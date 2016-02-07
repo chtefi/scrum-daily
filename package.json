@@ -1,8 +1,8 @@
 {
   "name": "src",
-  "version": "1.0.0",
-  "description": "",
-  "main": "App.js",
+  "version": "0.1.0",
+  "description": "Log your daily tasks",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
@@ -10,8 +10,8 @@
     "compile:prod": "set NODE_ENV=production&& webpack -p",
     "lint": "eslint src"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Stéphane Derosiaux",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.13.3",
     "lodash": "^4.2.1",
