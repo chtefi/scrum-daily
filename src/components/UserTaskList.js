@@ -1,23 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getCreateTaskAction, getDoTaskAction, getUndoTaskAction, getRenameTaskAction, getDeleteTaskAction } from '../actions/all.js';
-import { EditableText } from './EditableText.js';
+import { getCreateTaskAction } from '../actions/all.js';
+import UserTask from './UserTask.js';
 
 const STYLE_TASK_LIST = { margin: 0, padding: 0, listStyleType: 'none' };
-const STYLE_TASK_LIST_ITEM = { fontSize: 14, display: 'flex' };
-const STYLE_BUTTON = { border: '1px solid #ccc', cursor: 'pointer', padding: 0, width: 16, background: 'none', float: 'right' }
-
-const createTask = (userId, task, yyyymmdd, onCheckedTask, onRenamedTask, onCreateTask, onDeleteTask) =>
-  <li key={task.id} style={STYLE_TASK_LIST_ITEM}>
-    <div>
-      <input type="checkbox" checked={task.done} onChange={() => onCheckedTask(task.id, yyyymmdd, task.done)} />
-    </div>
-    <div style={{flex: 1}}>
-      <EditableText style={task.done ? { textDecoration: 'line-through'} : null} text={task.text} onTextChanged={(text) => onRenamedTask(task.id, text)} onEnter={() => onCreateTask(userId, yyyymmdd)} />
-      <button style={STYLE_BUTTON} onClick={() => onDeleteTask(task.id)}>-</button>
-    </div>
-  </li>;
+const STYLE_BUTTON = { border: '1px solid #ccc', cursor: 'pointer', padding: 0, width: 16, background: 'none', float: 'right' };
 
 //
 // Pure component
@@ -26,25 +14,22 @@ const createTask = (userId, task, yyyymmdd, onCheckedTask, onRenamedTask, onCrea
 // TODO(sd): pure function component syntax ?
 export class UserTaskList extends React.Component {
   render() {
-    const { userId, yyyymmdd, tasks, onCheckedTask, onRenamedTask, onCreateTask, onDeleteTask } = this.props;
+    const { userId, yyyymmdd, tasks, onCreateTask } = this.props;
     return (
       <div>
         <div style={{overflow: 'auto'}}><button style={STYLE_BUTTON} onClick={() => onCreateTask(userId, yyyymmdd)}>+</button></div>
         <ul className="tasks" style={STYLE_TASK_LIST}>
-          {tasks.map(task => createTask(userId, task, yyyymmdd, onCheckedTask, onRenamedTask, onCreateTask, onDeleteTask))}
+          {tasks.map(task => <UserTask key={task.id} userId={userId} yyyymmdd={yyyymmdd} task={task} />)}
         </ul>
       </div>
     );
   }
 }
 UserTaskList.propTypes = {
-  tasks: React.PropTypes.array.isRequired,
-  yyyymmdd: React.PropTypes.string.isRequired,
   userId: React.PropTypes.number.isRequired,
-  onCheckedTask: React.PropTypes.func.isRequired,
-  onRenamedTask: React.PropTypes.func.isRequired,
+  yyyymmdd: React.PropTypes.string.isRequired,
+  tasks: React.PropTypes.array.isRequired,  
   onCreateTask: React.PropTypes.func.isRequired,
-  onDeleteTask: React.PropTypes.func.isRequired,
 };
 
 //
@@ -53,9 +38,6 @@ UserTaskList.propTypes = {
 
 const mapStateToProps = null; 
 const mapDispatchToProps = (dispatch) => ({
-  onRenamedTask: (taskId, text) => dispatch(getRenameTaskAction(taskId, text)),  
-  onCheckedTask: (taskId, yyyymmdd, checked) => dispatch((checked ? getUndoTaskAction : getDoTaskAction)(taskId, yyyymmdd)),
   onCreateTask: (userId, yyyymmdd) => dispatch(getCreateTaskAction(userId, yyyymmdd)),
-  onDeleteTask: (taskId) => dispatch(getDeleteTaskAction(taskId)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(UserTaskList);

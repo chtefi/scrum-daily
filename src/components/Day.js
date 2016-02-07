@@ -15,7 +15,7 @@ const STYLE_CONTAINER = { background: 'white', borderRadius: 5, boxShadow: '3px 
 // helper fn
 const createTasksPerUser = (userId, yyyymmdd, tasks) =>
   <li key={userId} style={STYLE_USER_TASKLIST_ITEM}>
-    <UserTaskList tasks={tasks} userId={userId} yyyymmdd={yyyymmdd} />
+    <UserTaskList userId={userId} yyyymmdd={yyyymmdd} tasks={tasks} />
   </li>;
 
 

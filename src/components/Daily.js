@@ -55,7 +55,7 @@ export class Daily extends React.Component {
 Daily.propTypes = {
   users: React.PropTypes.array.isRequired,
   days: React.PropTypes.array.isRequired,
-  weeksVisibility: React.PropTypes.array.isRequired,
+  weeksVisibility: React.PropTypes.object.isRequired,
   onCreateUserClick: React.PropTypes.func.isRequired,
   onToggleWeekVisibility: React.PropTypes.func.isRequired,
 };

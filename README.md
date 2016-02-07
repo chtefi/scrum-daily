@@ -11,9 +11,9 @@ WIP.
 - [ ] style
 - [ ] have some kind of different views? pluggable
 - [ ] Firebase as database?
-- [ ] short-link system to access to an existing board ?
-- [ ] offline ?
-- [ ] ability to draw a tiny progress chart using some special text ie: "2/3"
+- [ ] short-link system to access to an existing board?
+- [ ] offline?
+- [ ] ability to have subtasks?
 - [ ] create a distinct repo for EditableText
 - [ ] add an export function (json? txt? doc?)
 - [x] expand/collapse previous weeks
