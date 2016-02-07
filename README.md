@@ -9,10 +9,10 @@ WIP.
 Must-have :
 
 - [ ] ability to set any state on a task (propagating (blocked) OR not propagating (cancelled))
-- [ ] add a counter next to each task to know how many days it spans
 - [ ] style
 - [ ] Firebase as database?
 - [ ] short-link system to access to an existing board?
+- [x] add a counter next to each task to know how many days it spans
 - [x] expand/collapse previous weeks
 - [x] ability to delete a task
 - [x] align days across people (should dynamic sizes per row)

@@ -21,6 +21,7 @@ export class UserTask extends React.Component {
         </div>
         <div style={{flex: 1}}>
           <EditableText style={task.done ? { textDecoration: 'line-through'} : null} text={task.text} onTextChanged={(text) => onRenamedTask(task.id, text)} onEnter={() => onCreateTask(userId, yyyymmdd)} />
+          { task.span > 1 ? `\u00A0(${task.span}d)` : '' /* \u00A0 is the &nbps; */}
           <button style={STYLE_BUTTON} onClick={() => onDeleteTask(task.id)}>-</button>
         </div>
       </li>

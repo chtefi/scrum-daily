@@ -57,8 +57,9 @@ export default (users) => {
       const doneDate = ddate ? moment(ddate) : null; // a task can be not finished yet
 
       let processingDate = creationDate;
+      let currentSpan = 0;
       do {
-        const task = { id: taskId, text, done: false };
+        const task = { id: taskId, text, done: false, span: ++currentSpan };
         const key = getKey(processingDate);
         const tasksForThisDate = find(tasksByDay, byDay => byDay.date === key).tasks;
         const user = find(tasksForThisDate, t => t.userId === userId);
