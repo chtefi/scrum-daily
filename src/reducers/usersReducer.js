@@ -58,8 +58,8 @@ const deleteTask = (taskId) => mapOnlyFiltered(
 
 const deleteUser = (userId) => (users) => users.filter(user => user.id !== userId);
 
-export default (state = {}, action) =>
-  action.type === CREATE_USER ? state.concat(createNewUser(getMaxUserId(state))) :
+export default function (state = {}, action) {
+  return action.type === CREATE_USER ? state.concat(createNewUser(getMaxUserId(state))) :
   action.type === DELETE_USER ? deleteUser(action.userId)(state) :
   action.type === CREATE_TASK ? addTaskToUser(action.userId, action.yyyymmdd)(state) :
   action.type === RENAME_USER ? renameUser(action.userId, action.name)(state) :
@@ -68,3 +68,4 @@ export default (state = {}, action) =>
   action.type === RENAME_TASK ? changeTaskStatus(action.taskId, action.text, 'text')(state) :
   action.type === DELETE_TASK ? deleteTask(action.taskId)(state) :
   state;
+}

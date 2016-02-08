@@ -25,6 +25,16 @@ const DEFAULT_STATE = {
 export default function configureStore() {
   const store = createStore(reducer, DEFAULT_STATE);
   // store.asyncReducers = {};
+  
+  /* eslint-disable */
+  if (module.hot) {
+    module.hot.accept('../reducers', () => {
+      const nextReducer = require('../reducers').default;
+      store.replaceReducer(nextReducer);
+    })
+  }
+  /* eslint-enable */
+
   return store;
 }
 
