@@ -1,6 +1,6 @@
 import find from 'lodash/find';
 
-import { CREATE_USER, DELETE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK, RENAME_USER, DELETE_TASK } from '../actions/types.js';
+import * as _ from '../actions/types.js';
 
 const NEW_USER_NAME = 'New User';
 const NEW_TASK_NAME = 'New Task';
@@ -59,13 +59,13 @@ const deleteTask = (taskId) => mapOnlyFiltered(
 const deleteUser = (userId) => (users) => users.filter(user => user.id !== userId);
 
 export default function (state = {}, action) {
-  return action.type === CREATE_USER ? state.concat(createNewUser(getMaxUserId(state))) :
-  action.type === DELETE_USER ? deleteUser(action.userId)(state) :
-  action.type === CREATE_TASK ? addTaskToUser(action.userId, action.yyyymmdd)(state) :
-  action.type === RENAME_USER ? renameUser(action.userId, action.name)(state) :
-  action.type === DO_TASK     ? changeTaskStatus(action.taskId, action.yyyymmdd, 'ddate')(state) :
-  action.type === UNDO_TASK   ? changeTaskStatus(action.taskId, null, 'ddate')(state) :
-  action.type === RENAME_TASK ? changeTaskStatus(action.taskId, action.text, 'text')(state) :
-  action.type === DELETE_TASK ? deleteTask(action.taskId)(state) :
+  return action.type === _.CREATE_USER ? state.concat(createNewUser(getMaxUserId(state))) :
+  action.type === _.DELETE_USER ? deleteUser(action.userId)(state) :
+  action.type === _.CREATE_TASK ? addTaskToUser(action.userId, action.yyyymmdd)(state) :
+  action.type === _.RENAME_USER ? renameUser(action.userId, action.name)(state) :
+  action.type === _.DO_TASK     ? changeTaskStatus(action.taskId, action.yyyymmdd, 'ddate')(state) :
+  action.type === _.UNDO_TASK   ? changeTaskStatus(action.taskId, null, 'ddate')(state) :
+  action.type === _.RENAME_TASK ? changeTaskStatus(action.taskId, action.text, 'text')(state) :
+  action.type === _.DELETE_TASK ? deleteTask(action.taskId)(state) :
   state;
 }
