@@ -1,25 +1,12 @@
-import { CREATE_USER, DELETE_USER, CREATE_TASK, DO_TASK, UNDO_TASK, RENAME_TASK, DELETE_TASK, RENAME_USER, TOGGLE_WEEK_VISIBILITY, SET_WEEK_VISIBILITY } from './types.js';
+import * as _ from './types.js';
 
-const getCreateUserAction = () => ({ type: CREATE_USER });
-const getDeleteUserAction = (userId) => ({ type: DELETE_USER, userId });
-const getCreateTaskAction = (userId, yyyymmdd) => ({ type: CREATE_TASK, userId, yyyymmdd });
-const getDoTaskAction = (taskId, yyyymmdd) => ({ type: DO_TASK, taskId, yyyymmdd });
-const getUndoTaskAction = (taskId) => ({ type: UNDO_TASK, taskId });
-const getRenameTaskAction = (taskId, text) => ({ type: RENAME_TASK, taskId, text });
-const getRenameUserAction = (userId, name) => ({ type: RENAME_USER, userId, name });
-const getDeleteTaskAction = (taskId) => ({ type: DELETE_TASK, taskId });
-const getToggleWeekVisibility = (weekNumber) => ({ type: TOGGLE_WEEK_VISIBILITY, weekNumber });
-const getSetWeekVisibility = (weekNumber) => ({ type: SET_WEEK_VISIBILITY, weekNumber });
-
-export {
-  getCreateUserAction,
-  getDeleteUserAction,
-  getCreateTaskAction,
-  getDoTaskAction,
-  getUndoTaskAction,
-  getRenameTaskAction,
-  getRenameUserAction,
-  getDeleteTaskAction,
-  getToggleWeekVisibility,
-  getSetWeekVisibility,
-};
+export const getCreateUserAction = () => ({ type: _.CREATE_USER });
+export const getDeleteUserAction = (userId) => ({ type: _.DELETE_USER, userId });
+export const getCreateTaskAction = (userId, yyyymmdd) => ({ type: _.CREATE_TASK, userId, yyyymmdd });
+export const getDoTaskAction = (taskId, yyyymmdd) => ({ type: _.DO_TASK, taskId, yyyymmdd });
+export const getUndoTaskAction = (taskId) => ({ type: _.UNDO_TASK, taskId });
+export const getRenameTaskAction = (taskId, text) => ({ type: _.RENAME_TASK, taskId, text });
+export const getRenameUserAction = (userId, name) => ({ type: _.RENAME_USER, userId, name });
+export const getDeleteTaskAction = (taskId) => ({ type: _.DELETE_TASK, taskId });
+export const getToggleWeekVisibility = (weekNumber) => ({ type: _.TOGGLE_WEEK_VISIBILITY, weekNumber });
+export const getSetWeekVisibility = (weekNumber) => ({ type: _.SET_WEEK_VISIBILITY, weekNumber });
