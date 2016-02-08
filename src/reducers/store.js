@@ -1,5 +1,5 @@
 import { createStore } from 'redux'
-import reducer from '../reducers';
+import createReducer from '../reducers';
 //import persistState from 'redux-localstorage';
 
 //import logState from '../middlewares/logState.js';
@@ -23,8 +23,8 @@ const DEFAULT_STATE = {
 
 
 export default function configureStore() {
-  const store = createStore(reducer, DEFAULT_STATE);
-  // store.asyncReducers = {};
+  const store = createStore(createReducer(), DEFAULT_STATE);
+  store.asyncReducers = {};
   
   /* eslint-disable */
   if (module.hot) {
@@ -38,7 +38,21 @@ export default function configureStore() {
   return store;
 }
 
-// export function injectAsyncReducer(store, name, asyncReducer) {
-//   store.asyncReducers[name] = reducer;
-//   store.replaceReducer(createReducer(store.asyncReducers));
-// }
+export function injectAsyncReducer(store, name, asyncReducer) {
+  store.asyncReducers[name] = asyncReducer;
+  store.replaceReducer(createReducer(store.asyncReducers));
+}
+
+// Anywhere in the code, we could do that to load async a component and a reducer :
+// Important: Names MUST be strings, not constant.
+// Otherwise Webpack won't handle that properly (it needs pure strings, it does not
+// evaluate javascript values)
+// It replaces by something like : __webpack_require__.e/* nsure */(1, function (require) {
+/*
+require.ensure([ './MyComponent.js', '../reducers/anotherReducer.js' ], function (require) {
+  const Component = require('./MyComponent.js').default;
+  const anotherReducer = require('../reducers/anotherReducer.js').default;
+  injectAsyncReducer(store, 'another', anotherReducer);
+  callback(null, Component);
+})
+*/
