@@ -1,20 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux'
-import configureStore from '../reducers/store.js';
+import configureStore from '../store/store.js';
 
 import Daily from './Daily.js';
-import DevTools from './DevTools.js';
 
 const STYLE_APP = { color: 'black', fontFamily: 'Roboto', padding: 10 };
 const STYLE_TITLE = { fontSize: 30, fontFamily: 'Roboto', fontWeight: 'bold', margin: 0, marginBottom: 10, padding: 10, backgroundColor: 'rgba(0,0,0,0.5)', color: '#eee', borderRadius: 5 };
-
-
-//const storeEnhancer = applyMiddleware(logState, logAction);
-
-// TODO(sd): Ultra ugly for now, must create distinct files to the stores, and for the root component
-// because right now, we import the whole stuff in the production bundle : it sucks.
-// https://github.com/gaearon/redux-devtools/blob/master/docs/Walkthrough.md
-const isProduction = (process.env.NODE_ENV === 'production');
 
 const GitHub = () =>
   <svg aria-hidden="true" height="28" role="img" version="1.1" viewBox="0 0 16 16" width="28" fill="#FFFFFF">
@@ -26,14 +17,20 @@ const GitHub = () =>
 export default class extends React.Component {
   render() {
     const store = configureStore();
-    
+
+    let addons = null;
+    // don't use a const otherwise uglify won't squash it
+    if (process.env.NODE_ENV !== 'production') {
+       addons = require('./DevTools.js').default;
+    }
+
     return (
       <div style={STYLE_APP}>
         <h1 style={STYLE_TITLE}>Never forget your daily <a style={{verticalAlign: 'middle'}} title="https://github.com/chtefi/scrum-daily" target="_blank" href="https://github.com/chtefi/scrum-daily"><GitHub /></a></h1>
         <Provider store={store}>
           <div>
             <Daily />
-            { !isProduction && <DevTools /> }
+            { process.env.NODE_ENV !== 'production' && addons }
           </div>
         </Provider>
       </div>

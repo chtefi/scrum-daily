@@ -1,5 +1,7 @@
 import { createStore } from 'redux'
 import createReducer from '../reducers';
+import DevTools from '../components/DevTools.js';
+
 //import persistState from 'redux-localstorage';
 
 //import logState from '../middlewares/logState.js';
@@ -23,7 +25,7 @@ const DEFAULT_STATE = {
 
 
 export default function configureStore() {
-  const store = createStore(createReducer(), DEFAULT_STATE);
+  const store = createStore(createReducer(), DEFAULT_STATE, DevTools.instrument());
   store.asyncReducers = {};
   
   /* eslint-disable */
