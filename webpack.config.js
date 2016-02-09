@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 var isProduction = (process.env.NODE_ENV === 'production');
+console.log('Production build: ', isProduction);
 
 var entries = [ path.join(__dirname, 'src', 'index.js') ]
 if (!isProduction) entries.push('webpack-hot-middleware/client');

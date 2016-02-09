@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
+    "start:prod": "cross-env NODE_ENV=production node server/server.js",
     "compile": "webpack",
-    "compile:prod": "set NODE_ENV=production&& webpack -p",
+    "compile:prod": "cross-env NODE_ENV=production webpack",
     "lint": "eslint src"
   },
   "author": "Stéphane Derosiaux",
@@ -32,6 +33,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-1": "^6.3.13",
     "babel-preset-stage-2": "^6.3.13",
+    "cross-env": "^1.0.7",
     "eslint": "^1.10.3",
     "eslint-plugin-react": "^3.13.1",
     "react-transform-hmr": "^1.0.1",
