@@ -18,10 +18,10 @@ export default class extends React.Component {
   render() {
     const store = configureStore();
 
-    let addons = null;
+    let Addons = null;
     // don't use a const otherwise uglify won't squash it
     if (process.env.NODE_ENV !== 'production') {
-       addons = require('./DevTools.js').default;
+       Addons = require('./DevTools.js').default;
     }
 
     return (
@@ -30,7 +30,7 @@ export default class extends React.Component {
         <Provider store={store}>
           <div>
             <Daily />
-            { process.env.NODE_ENV !== 'production' && addons }
+            { process.env.NODE_ENV !== 'production' && <Addons /> }
           </div>
         </Provider>
       </div>
