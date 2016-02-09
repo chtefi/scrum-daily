@@ -25,7 +25,8 @@ module.exports = {
   entry: entries,
   output: output,
   module: {
-    loaders: loaders
+    loaders: loaders,
+    noParse: [ /moment\.js/ ] // don't add all the locales into the bundle (-130kB minified) https://github.com/webpack/webpack/issues/198
   },
-  plugins: plugins
+  plugins: plugins,
 };
