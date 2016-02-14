@@ -53,6 +53,6 @@ const mapStateToProps = (state, props) => ({
   date: props.date,
   tasksByUser: props.tasks,
 });
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (/*dispatch*/) => ({
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Day);

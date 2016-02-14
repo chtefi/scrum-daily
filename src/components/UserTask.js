@@ -15,7 +15,7 @@ const STYLE_DAY_SPAN = { color: '#888', fontSize: 11 };
 
 export class UserTask extends React.Component {
   render() {
-    const { userId, task, yyyymmdd, onCheckedTask, onRenamedTask, onCreateTask, onDeleteTask } = this.props;
+    const { /*userId, */task, yyyymmdd, onCheckedTask, onRenamedTask, /*onCreateTask,*/ onDeleteTask } = this.props;
     return (
       <li style={STYLE_TASK_LIST_ITEM}>
         <div>
