@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 import { EditableText } from './EditableText.js';
 import { getCreateTaskAction, getDoTaskAction, getUndoTaskAction, getRenameTaskAction, getDeleteTaskAction } from '../actions/all.js';
 
-const STYLE_TASK_LIST_ITEM = { fontSize: 14, display: 'flex' };
-const STYLE_BUTTON = { border: 0, cursor: 'pointer', padding: 0, height: 16, width: 16, color: '#888', background: 'none', float: 'right' };
-const STYLE_CHECK_BUTTON = { border: 0, cursor: 'pointer', padding: 0, width: 10, color: '#444', background: 'none', marginRight: 5 };
-const STYLE_DAY_SPAN = { color: '#888', fontSize: 11 };
+import Styles from '../css/UserTask.css';
+
 
 //
 // Pure component
@@ -17,9 +15,9 @@ export class UserTask extends React.Component {
   render() {
     const { /*userId, */task, yyyymmdd, onCheckedTask, onRenamedTask, /*onCreateTask,*/ onDeleteTask } = this.props;
     return (
-      <li style={STYLE_TASK_LIST_ITEM}>
+      <li className={Styles.UserTask}>
         <div>
-          <button style={STYLE_CHECK_BUTTON} onClick={() => onCheckedTask(task.id, yyyymmdd, task.done)}>
+          <button className="check" onClick={() => onCheckedTask(task.id, yyyymmdd, task.done)}>
             <i className={"fa " + (task.done ? "fa-check-square-o" : "fa-square-o")}></i>
           </button>
         </div>
@@ -27,8 +25,8 @@ export class UserTask extends React.Component {
           <EditableText style={task.done ? { textDecoration: 'line-through'} : null} text={task.text}
                         onTextChanged={(text) => onRenamedTask(task.id, text)}
                         onEnter={() => {}} />
-          { task.span > 1 ? <span style={STYLE_DAY_SPAN}> ({task.span}d)</span> : '' /* \u00A0 is the &nbps; */}
-          <button style={STYLE_BUTTON} onClick={() => onDeleteTask(task.id)}><i className="fa fa-times"></i></button>
+          { task.span > 1 ? <span className="span"> ({task.span}d)</span> : '' /* \u00A0 is the &nbps; */}
+          <button className="delete" onClick={() => onDeleteTask(task.id)}><i className="fa fa-times"></i></button>
         </div>
       </li>
     );

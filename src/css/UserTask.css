@@ -1,0 +1,38 @@
+:local(.UserTask) {
+  font-size: 14px;
+  display: flex;
+
+  button.check {
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    height: 16px;
+    width: 16px;
+    color: #888;
+    background: none;
+  }
+
+  button.delete {
+    float: right;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    width: 10px;
+    color: #444;
+    background: none;
+    margin-right: 5;
+    visibility: hidden;
+  }
+  
+  &:hover button.delete {
+    visibility: visible;
+  }
+
+  .span {
+    color: '#888';
+    font-size: 11px;
+  }
+}
+
+
+

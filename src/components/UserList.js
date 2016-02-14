@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import User from './User.js';
@@ -21,7 +22,7 @@ export class UserList extends React.Component {
       <ul className="users" style={STYLE_USER_LIST}>
         {users.map(createUser)}
         <li key="createUser" style={STYLE_CREATE_USER}>
-          <button className="button" onClick={() => onCreateUserClick()}>Add a user</button>
+          <Button bsStyle="primary" onClick={() => onCreateUserClick()}>Add a user</Button>
         </li>
       </ul>
     );

@@ -1,0 +1,6 @@
+ * { box-sizing: border-box; }
+/* hack waiting to do some proper css */
+.day li:last-child { border-right: none !important; }
+ul, li { list-style-type: none; margin: 0; padding: 0; }
+:focus { outline: 0; }
+
