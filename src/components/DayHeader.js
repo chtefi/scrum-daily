@@ -1,18 +1,17 @@
 import React from 'react';
 import moment from 'moment';
+import { DayHeader as DayHeaderClass } from '../css/DayHeader.css';
 
 //
 // Pure component
 //
-
-const STYLE_HEADER = { fontWeight: 'bold', fontSize: 18, padding: 10, borderBottom: '1px solid rgba(0,0,0,0.2)' }
 
 // TODO(sd): function component syntax ?
 export class DayHeader extends React.Component {
   render() {
     const { date } = this.props;
     return (
-      <header style={STYLE_HEADER}>{moment(date).format('MMM DD')} <i style={{color: '#888' }} className="fa fa-angle-double-right"></i> {moment(date).format('dddd')}</header>
+      <header className={DayHeaderClass}>{moment(date).format('MMM DD')} <i style={{color: '#888' }} className="fa fa-angle-double-right"></i> {moment(date).format('dddd')}</header>
     );
   }
 }
