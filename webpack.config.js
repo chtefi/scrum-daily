@@ -2,6 +2,7 @@
 
 var path = require('path');
 var webpack = require('webpack');
+console.log(webpack);
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -14,27 +15,31 @@ if (!isProduction) {
 }
 
 var plugins = [
-  new HtmlWebpackPlugin({
-    template: path.join(__dirname, 'src', 'index.html'),
-    inject: true,
-    hash: false,
-    showErrors: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeRedundantAttributes: true,
-      useShortDoctype: true,
-      removeEmptyAttributes: true,
-      removeScriptTypeAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      keepClosingSlash: true,
-      minifyJS: true,
-      minifyCSS: true,
-      minifyURLs: true
-    }
-  }),
+  new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+  // new HtmlWebpackPlugin({
+  //   template: path.join(__dirname, 'src', 'index.html'),
+  //   inject: true,
+  //   hash: false,
+  //   showErrors: true,
+  //   minify: {
+  //     removeComments: true,
+  //     collapseWhitespace: true,
+  //     removeRedundantAttributes: true,
+  //     useShortDoctype: true,
+  //     removeEmptyAttributes: true,
+  //     removeScriptTypeAttributes: true,
+  //     removeStyleLinkTypeAttributes: true,
+  //     keepClosingSlash: true,
+  //     minifyJS: true,
+  //     minifyCSS: true,
+  //     minifyURLs: true
+  //   }
+  // }),
   new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
-  new webpack.optimize.OccurenceOrderPlugin()
+  new webpack.optimize.OccurrenceOrderPlugin()
 ];
 
 if (!isProduction) {
@@ -44,13 +49,13 @@ if (!isProduction) {
   );
 } else {
   plugins.push(
-    new webpack.optimize.UglifyJsPlugin({ compressor: {
+    new webpack.optimize.UglifyJsPlugin({ compress: {
       pure_getters: true,
       unsafe: true,
       unsafe_comps: true,
       screw_ie8: true,
       warnings: false
-    }}),
+    }, sourceMap: false }),
     new ExtractTextPlugin("styles.css")
   );
 }
@@ -74,7 +79,7 @@ var loaders = [{
   // then, the plugins part comes and specify what's the name of css bundle (could have more than one)
   // we MUST NOT use ExtractTextPlugin in dev (HMR won't work)
   // https://github.com/webpack/extract-text-webpack-plugin/issues/30
-  loader: isProduction ? ExtractTextPlugin.extract('style', [ 'css?{ discardComments: {removeAll:true}, localIdentName: "[hash:base64:5]"}', 'postcss' ]) : 'style!css?localIdentName=[hash:base64:5]!postcss',
+  loaders: [ 'style', 'css', 'postcss' ],
   include: path.join(__dirname, 'src'),
 }];
 
@@ -84,13 +89,20 @@ var nodeModules = {}
  // });
 
 module.exports = {
-  devtool: devtool,
+  //cd devtool: devtool,
   entry: entries,
   output: output,
   externals: nodeModules,
   module: {
     loaders: loaders,
     noParse: [ /moment\.js/ ] // don't add all the locales into the bundle (-130kB minified) https://github.com/webpack/webpack/issues/198
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+    modules: [
+      path.resolve('./src'),
+      'node_modules'
+    ]
   },
   plugins: plugins,
   postcss: function (webpack) {
