@@ -1,3 +1,5 @@
+ @import 'normalize.css';
+
  * { box-sizing: border-box; }
 /* hack waiting to do some proper css */
 .day li:last-child { border-right: none !important; }

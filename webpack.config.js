@@ -74,7 +74,7 @@ var loaders = [{
   // then, the plugins part comes and specify what's the name of css bundle (could have more than one)
   // we MUST NOT use ExtractTextPlugin in dev (HMR won't work)
   // https://github.com/webpack/extract-text-webpack-plugin/issues/30
-  loader: isProduction ? ExtractTextPlugin.extract('style', [ 'css', 'postcss' ]) : 'style!css!postcss',
+  loader: isProduction ? ExtractTextPlugin.extract('style', [ 'css?{ discardComments: {removeAll:true}, localIdentName: "[hash:base64:5]"}', 'postcss' ]) : 'style!css?localIdentName=[hash:base64:5]!postcss',
   include: path.join(__dirname, 'src'),
 }];
 
@@ -93,12 +93,12 @@ module.exports = {
     noParse: [ /moment\.js/ ] // don't add all the locales into the bundle (-130kB minified) https://github.com/webpack/webpack/issues/198
   },
   plugins: plugins,
-  postcss: function () {
+  postcss: function (webpack) {
       return [
-        require('postcss-simple-vars')(),
-        require('postcss-focus')(),
+        require('postcss-import')({ addDependencyTo: webpack }), // @imports
+        require('postcss-focus')(), // add :focus where there is :hover
         require('autoprefixer')({ browsers: [ 'last 3 versions', 'IE > 9' ] }),
-        require('precss')
+        require('precss') // sass style
       ];
   }
 };
