@@ -1,5 +1,5 @@
 {
-  "name": "src",
+  "name": "scrum-daily",
   "version": "0.1.0",
   "description": "Log your daily tasks",
   "main": "src/index.js",
@@ -45,6 +45,7 @@
     "postcss-loader": "^0.8.1",
     "postcss-simple-vars": "^1.2.0",
     "precss": "^1.4.0",
+    "react-bootstrap": "^0.28.3",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.2.2",
@@ -55,5 +56,17 @@
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chtefi/scrum-daily.git"
+  },
+  "keywords": [
+    "scrum",
+    "daily"
+  ],
+  "bugs": {
+    "url": "https://github.com/chtefi/scrum-daily/issues"
+  },
+  "homepage": "https://github.com/chtefi/scrum-daily#readme"
 }
