@@ -9,7 +9,7 @@ WIP.
 Must-have :
 
 - [ ] style
-- [ ] Firebase as database?
+- [ ] Firebase as database? or easier http://myjson.com/api
 - [ ] short-link system to access to an existing board?
 - [x] add a counter next to each task to know how many days it spans
 - [x] expand/collapse previous weeks
